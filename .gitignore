@@ -1,0 +1,4 @@
+build.ninja
+files/*
+MEND
+.ninja_*

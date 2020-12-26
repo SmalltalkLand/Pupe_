@@ -1,0 +1,18 @@
+app-id: org.pupe.Run
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+command: start.sh
+modules:
+  - name: pupe
+    buildsystem: simple
+    build-commands:
+      - install -D index.sfs /app/bin/index.sfs
+      - install -D bwrap /app/bin/bwrap
+    sources:
+      - type: file
+        path: ../index.sfs
+      - type: file
+        path: /usr/bin/bwrap
+      - type: file
+        path: ./start.sh

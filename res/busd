@@ -1,0 +1,15 @@
+#!/bin/bash
+f=/$(head -c 30 /dev/random | base64 -w0)
+mkfifo $f
+rand(){echo $(head -c 30 /dev/random | base64 -w0)}
+x11=$(rand)
+rander=/$(rand)
+echo "echo $(head -c 30 /dev/random | base64 -w0)" > $rander
+dockerd=/tmp/docker/$(rand)
+mkdir $dockerd
+redis_net=$(rand)
+echo "dockerd dockerd dockerd dockerd -H unix://$dockerd/docker.sock -- docker docker docker shsrvr /proc/self/fd/0 socat CONNECT:$dockerd/docker.sock -- snd snd open:/dev/null:/dev/snd cat -- x11 open:/tmp/.X11-unix/X0:/dev/null open:/dev/null:/tmp/.X11-unix/X0 -- x11m x11 x11 socat LISTEN:/tmp/X11/$x11/X0 -- shsrvr shsrvr shsrvr shsrvr server /proc/self/fd/0 /bin/shsrvr -- adder adder3 adder3 cat -- chost adder3 adder3 cat /tmp/pupe/bus0 -- qemu qemu qemu shsrvr server /proc/self/fd/0 bwrap --bind / / --bind /tmp/X11/$x11 /tmp/.X11-unix qemu-system-x86_64  -virtfs local,path=/,mount_tag=root,security_model=mapped  -usb -device usb-tablet -- squeak squeak shsrvr server /proc/self/fd/0 bwrap --bind / / --bind /tmp/X11/$x11 /tmp/.X11-unix squeak -- redissrv redissrv redissrv bwrap --bind / / --bind $dockerd /var/run docker run -it --rm --name core_redis --network redis_$redis_net redis-server -- redis redis bwrap --bind / / --bind $dockerd /var/run docker run -it --rm --name core_redis_client --network redis_$redis_net redis-cli -- pspy pspy pspy shsrvr client /bin/sock/pspy -- avservice_grepper pspy avservice_grepper grep -o PID=\d* -- avservice avservice_grepper outside xargs /bin/av" > $f
+mkfifo /tmp/pupe/bus0
+echo "sandbox bus1 outside outside x11->x11 snd->snd adder3->bus0 docker->docker redis->redis pspy->pspy -- bus1 bus1 bus1 cat /tmp/pupe/bus1" > /tmp/pupe/bus0
+mkfifo /tmp/pupe/bus1
+exec /bin/plugy adder add outside cat -- adder2 adder2 add cat -- core outside adder2 cat $f

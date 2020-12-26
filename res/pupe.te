@@ -1,0 +1,4 @@
+full_user_role(root)
+user root roles {system_r root_r container_r sysadm_r}
+user spot roles {container_r}
+allow * *:dir {chroot -> root}
